@@ -14,7 +14,7 @@
             @let ads = astronautDuty()?.astronautDuties ?? [];
             @if (ads.length) {
                 <button pButton severity="secondary" (click)="addDuty()"><span pButtonLabel>Add Duty</span></button>
-                <p-table [value]="ads ?? []" [tableStyle]="{ 'min-width': '50rem' }">
+                <p-table [value]="ads ?? []" [tableStyle]="{ 'min-width': '50rem' }" class="pt-2">
                     <ng-template #header>
                         <tr>
                             <th>Rank</th>
