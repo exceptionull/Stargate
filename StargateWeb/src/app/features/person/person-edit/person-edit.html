@@ -1,0 +1,17 @@
+<p-dialog header="Edit Person" [modal]="true" [visible]="visible()" 
+      (onHide)="visible.set(false)" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-8">Edit an existing person.</span>
+    <form [formGroup]="form" class="flex flex-col gap-4 w-full">
+        <input type="hidden" formControlName="name" />
+        <div class="flex flex-col gap-1">
+            <input pInputText id="newName" placeholder="Name" formControlName="newName" [invalid]="isInvalid(form.controls.newName, formSubmitted)" />
+            @if (isInvalid(form.controls.newName, formSubmitted)) {
+                <p-message severity="error" size="small" variant="simple">Name is required.</p-message>
+            }
+        </div>
+        <div class="flex justify-end gap-2">
+            <p-button label="Cancel" severity="secondary" (click)="cancel()" />
+            <p-button label="Save" (click)="edit()" />
+        </div>
+    </form>
+</p-dialog>

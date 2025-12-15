@@ -1,0 +1,43 @@
+<div class="flex flex-col gap-4">
+    @let p = astronautDuty()?.person;
+    @if(p) {
+        <p-card header="Person Details">
+            <div class="flex flex-col gap-2">
+                <div><strong>Name: </strong>{{ p.name | na }}</div>
+                <div><strong>Current Rank: </strong>{{ p?.currentRank | na }}</div>
+                <div><strong>Current Duty Title: </strong>{{ p?.currentDutyTitle | na }}</div>
+                <div><strong>Career Start Date: </strong>{{ p?.careerStartDate | date | na }}</div>
+                <div><strong>Career End Date: </strong>{{ p?.careerEndDate | date | na }}</div>
+            </div>                
+        </p-card>
+        <p-card header="Duty">
+            @let ads = astronautDuty()?.astronautDuties ?? [];
+            @if (ads.length) {
+                <button pButton severity="secondary" (click)="addDuty()"><span pButtonLabel>Add Duty</span></button>
+                <p-table [value]="ads ?? []" [tableStyle]="{ 'min-width': '50rem' }">
+                    <ng-template #header>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Duty Title</th>
+                            <th>Duty Start Date</th>
+                            <th>Duty End Date</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template #body let-duty>
+                        <tr>
+                            <td>{{ duty.rank }}</td>
+                            <td>{{ duty.dutyTitle }}</td>
+                            <td>{{ duty.dutyStartDate | date }}</td>
+                            <td>{{ duty.dutyEndDate | date }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                
+            } @else {
+                No active duty found! <button pButton severity="secondary" (click)="addDuty()"><span pButtonLabel>Add Duty</span></button>
+            }    
+        </p-card>
+    }    
+</div>
+
+<person-duty-add (success)="refresh$.next()"></person-duty-add>

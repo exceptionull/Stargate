@@ -1,0 +1,16 @@
+<p-dialog header="Add Person" [modal]="true" [visible]="visible()" 
+      (onHide)="visible.set(false)" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-8">Add a new person.</span>
+    <form [formGroup]="form" class="flex flex-col gap-4 w-full">
+        <div class="flex flex-col gap-1">
+            <input pInputText id="name" placeholder="Name" formControlName="name" [invalid]="isInvalid(form.controls.name, formSubmitted)" />
+            @if (isInvalid(form.controls.name, formSubmitted)) {
+                <p-message severity="error" size="small" variant="simple">Name is required.</p-message>
+            }
+        </div>
+        <div class="flex justify-end gap-2">
+            <p-button label="Cancel" severity="secondary" (click)="cancel()" />
+            <p-button label="Add" (click)="add()" />
+        </div>
+    </form>
+</p-dialog>

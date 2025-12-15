@@ -1,0 +1,1 @@
+export const errorMessageDefault = 'An internal error has occurred please try again.';
